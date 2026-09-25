@@ -94,6 +94,7 @@ cursor:pointer;
 }
     
 .smile{
+width:100px;
 cursor:pointer;
 transition:0.2s;
 }
@@ -119,11 +120,11 @@ Sua opinião é muito importante para nós.
 
 <div class="emojis">
  
-<img src="pessimo.png" style="width:100px" class="smile" onclick="selecionar(1,this)">
-<img src="ruim.png" style="width:100px" class="smile" onclick="selecionar(2,this)">
-<img src="neutro.png" style="width:100px" class="smile" onclick="selecionar(3,this)">
-<img src="bom.png" style="width:100px" class="smile" onclick="selecionar(4,this)">
-<img src="otimo.png" style="width:100px" class="smile" onclick="selecionar(5,this)">
+<img src="pessimo.png" class="smile" onclick="selecionar(1,this)">
+<img src="ruim.png" class="smile" onclick="selecionar(2,this)">
+<img src="neutro.png" class="smile" onclick="selecionar(3,this)">
+<img src="bom.png" class="smile" onclick="selecionar(4,this)">
+<img src="otimo.png" class="smile" onclick="selecionar(5,this)">
  
 </div>
     
@@ -144,17 +145,17 @@ ENVIAR
 let nota = null;
 
 function selecionar(valor, imagem){
-    
+ 
 nota = valor;
  
 document.querySelectorAll(".smile").forEach(function(img){
  
-img.style.width = "70px";
+img.style.transform = "scale(0.7)";
 img.style.opacity = "0.4";
  
 });
  
-imagem.style.width = "100px";
+imagem.style.transform = "scale(1)";
 imagem.style.opacity = "1";
  
 }
