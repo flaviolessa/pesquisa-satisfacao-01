@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Avaliação de Atendimento</title>
+
+<style>
+
+.logo{
+width:100px;
+margin-bottom:20px;
+}
+`
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eaf4ff;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    width:100%;
+    max-width:700px;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,0.15);
+    text-align:center;
+}
+
+h1{
+    color:#005a9c;
+    margin-bottom:15px;
+}
+
+.subtitulo{
+    color:#666;
+    margin-bottom:30px;
+}
+
+.emojis{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.emoji{
+    font-size:72px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.emoji:hover{
+    transform:scale(1.2);
+}
+
+.selecionado{
+    transform:scale(1.3);
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    padding:15px;
+    border:2px solid #d9d9d9;
+    border-radius:10px;
+    resize:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:10px;
+    background:#0078d4;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#005fa3;
+}
+
+#mensagem{
+    margin-top:20px;
+    color:green;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<img src="logo.png" alt="Logo" class="logo">
+
+<h1>Como você avalia o atendimento recebido?</h1>
+
+<p class="subtitulo">
+Sua opinião é muito importante para nós.
+</p>
+
+<div class="emojis">
+
+<span class="emoji" data-nota="1">😡</span>
+<span class="emoji" data-nota="2">😕</span>
+<span class="emoji" data-nota="3">😐</span>
+<span class="emoji" data-nota="4">😊</span>
+<span class="emoji" data-nota="5">🤩</span>
+
+</div>
+
+<textarea id="comentario" placeholder="Comentário (opcional)"></textarea>
+
+<br>
+
+<button onclick="enviar()">
+Enviar Avaliação
+</button>
+
+<div id="mensagem"></div>
+
+</div>
+
+<script>
+
+let nota = null;
+
+document.querySelectorAll(".emoji").forEach(function(item){
+
+    item.addEventListener("click", function(){
+
+        document.querySelectorAll(".emoji").forEach(function(e){
+            e.classList.remove("selecionado");
+        });
+
+        item.classList.add("selecionado");
+
+        nota = item.dataset.nota;
+
+    });
+
+});
+
+function enviar(){
+
+    if(!nota){
+
+        alert("Selecione uma avaliação.");
+
+        return;
+    }
+
+    const comentario =
+        document.getElementById("comentario").value;
+
+    const iframe =
+        document.createElement("iframe");
+
+    iframe.style.display = "none";
+
+    document.body.appendChild(iframe);
+
+    const form =
+        document.createElement("form");
+
+    form.method = "POST";
+
+    form.action =
+        "https://script.google.com/macros/s/AKfycbw6LUTm-rRymR3jIk56XgT3Mgg3M7TIQ6p9q_0Dcg7tME7x6_6rV0ZY9-T8pSeq3LSkyQ/exec";
+
+    form.target =
+        iframe.name =
+        "iframeOculto";
+
+    const campoNota =
+        document.createElement("input");
+
+    campoNota.name = "nota";
+    campoNota.value = nota;
+
+    const campoComentario =
+        document.createElement("input");
+
+    campoComentario.name = "comentario";
+    campoComentario.value = comentario;
+
+    form.appendChild(campoNota);
+    form.appendChild(campoComentario);
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+    document.querySelector(".card").innerHTML = `
+
+        <img src="logo.png" alt="Logo" class="logo">
+
+        <h1>✅ Obrigado pela sua avaliação!</h1>
+
+        <p class="subtitulo">
+            Sua opinião é muito importante para nós.
+        </p>
+
+    `;
+
+    setTimeout(function(){
+
+        location.reload();
+
+    }, 3000);
+
+}
+
+</script>
+
+</body>
+</html>
