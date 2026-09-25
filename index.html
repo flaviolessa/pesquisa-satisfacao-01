@@ -193,17 +193,17 @@ form.target = "iframeOculto";
 
     const campoNota =
         document.createElement("input");
-
-    campoNota.type = "hidden";
-    campoNota.name = "nota";
-    campoNota.value = nota;
-
+     
+            campoNota.setAttribute("type", "hidden");
+            campoNota.name = "nota";
+            campoNota.value = nota;
+     
     const campoComentario =
         document.createElement("input");
-
-    campoComentario.type = "hidden";
-    campoComentario.name = "comentario";
-    campoComentario.value = comentario;
+     
+            campoComentario.setAttribute("type", "hidden");
+            campoComentario.name = "comentario";
+            campoComentario.value = comentario;
 
     form.appendChild(campoNota);
     form.appendChild(campoComentario);
