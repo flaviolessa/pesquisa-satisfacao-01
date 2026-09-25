@@ -144,6 +144,8 @@ ENVIAR
 
 let nota = null;
 
+    const agencia = "DRE 01 - Curitiba";
+    
 function selecionar(valor, imagem){
  
 nota = valor;
@@ -206,8 +208,16 @@ form.target = "iframeOculto";
             campoComentario.name = "comentario";
             campoComentario.value = comentario;
 
+    const campoAgencia =
+        document.createElement("input");
+ 
+            campoAgencia.setAttribute("type", "hidden");
+            campoAgencia.name = "agencia";
+            campoAgencia.value = agencia;
+
     form.appendChild(campoNota);
     form.appendChild(campoComentario);
+    form.appendChild(campoAgencia);
 
     document.body.appendChild(form);
   
