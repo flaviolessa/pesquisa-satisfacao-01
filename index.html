@@ -114,8 +114,8 @@ transition:0.2s;
 }
  
 .apagado{
-opacity:0.4 !important;
-transform:scale(0.7) !important;
+opacity:0.4;
+width:70px !important;
 }
     
 </style>
@@ -164,12 +164,13 @@ nota = valor;
  
 document.querySelectorAll(".smile").forEach(function(img){
  
-img.classList.add("apagado");
+img.style.width = "70px";
+img.style.opacity = "0.4";
  
 });
  
-imagem.classList.remove("apagado");
-    console.log("clicou", valor); 
+imagem.style.width = "100px";
+imagem.style.opacity = "1";
  
 }
 
